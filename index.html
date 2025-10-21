@@ -13,9 +13,8 @@ body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; scroll-behavior: s
 nav {
   position: fixed;
   top: 0;
-  left: 0;          /* <-- adicionado */
-  right: 0;         /* <-- adicionado */
-  background: #fff; /* <-- se quiser manter branco, mude para transparent se quiser como antes */
+  right: 0;
+  background: transparent;
   padding: 15px 25px;
   z-index: 1000;
   display: flex;               /* manter menu em linha */
@@ -23,7 +22,6 @@ nav {
   white-space: nowrap;         /* impede quebra de linha */
   overflow-x: auto;            /* rolagem horizontal se apertar */
   -webkit-overflow-scrolling: touch;
-  align-items: center;         /* <-- garante alinhamento vertical central no mobile */
 }
 nav a {
   text-decoration: none;
@@ -33,13 +31,8 @@ nav a {
   transition: color 0.3s, transform 0.3s;
 }
 nav a:hover { color: var(--cor-secundaria); transform: scale(1.05); }
-
 @media (max-width: 480px) {
-  nav { 
-    padding: 10px 14px; 
-    gap: 16px; 
-    justify-content: flex-start; /* <-- garante que o ABUV fique visível à esquerda */
-  }
+  nav { padding: 10px 14px; gap: 16px; }
   nav a { font-size: 16px; }
 }
 
