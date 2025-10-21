@@ -14,27 +14,21 @@ nav {
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;                     /* ocupa toda a largura */
-  background: #fff;            /* fundo branco fixo */
-  padding: 15px 25px;
+  left: 0;
+  height: 56px;               /* altura fixa do topo */
+  background: #fff !important; /* força fundo branco */
+  padding: 12px 20px;         /* ajustado p/ caber nos 56px */
   z-index: 1000;
   display: flex;
+  align-items: center;        /* centraliza verticalmente os links */
   gap: 25px;
   white-space: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* leve sombra p/ destacar */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.3s, transform 0.3s;
-}
-nav a:hover { color: var(--cor-secundaria); transform: scale(1.05); }
 @media (max-width: 480px) {
-  nav { padding: 10px 14px; gap: 16px; }
+  nav { padding: 8px 12px; gap: 16px; height: 48px; }
   nav a { font-size: 16px; }
 }
 
