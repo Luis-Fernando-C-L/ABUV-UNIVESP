@@ -6,101 +6,32 @@
 <title>ABUV - Associação de Bairros Unidos Venceremos</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<style>
-:root { --cor-primaria: #1b2845; --cor-secundaria: #00b351; }
-body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; scroll-behavior: smooth; color: #333; background:#fff; }
-/* topo (AJUSTADO) */
-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 56px;               /* altura fixa do topo */
-  background: #fff !important; /* força fundo branco */
-  padding: 12px 20px;         /* ajustado p/ caber nos 56px */
-  z-index: 1000;
-  display: flex;
-  align-items: center;        /* centraliza verticalmente os links */
-  gap: 25px;
-  white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-@media (max-width: 480px) {
-  nav { padding: 8px 12px; gap: 16px; height: 48px; }
-  nav a { font-size: 16px; }
-}
-
-header { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #fff; }
-header img.logo { width: 320px; max-width: 80%; }
-/* seções */
-section { padding: 80px 20px; font-size: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh; }
-#quem-somos { background-color: #e0f7fa; }
-#atividades { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
-#banco-dados { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
-#contato { background: linear-gradient(135deg, #fce4ec, #f8bbd0); scroll-margin-top: 80px; }
-/* botões */
-.botao-formulario { display: inline-block; padding: 12px 24px; background-color: var(--cor-primaria); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; border:none; cursor:pointer; }
-.botao-formulario:hover { background-color: var(--cor-secundaria); transform: scale(1.05); }
-/* galeria quem somos */
-.galeria { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
-.galeria-img { width: 220px; height: 160px; object-fit: cover; border-radius: 10px; box-shadow: 0 3px 6px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s, opacity 0.3s; }
-.galeria-img:hover { transform: scale(1.05); opacity: 0.9; }
-/* modal padrão */
-.modal { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center; z-index:2000; opacity: 0; animation: fadeIn 0.25s forwards; flex-direction: column; padding: 12px; }
-.modal-card { background:#fff; padding:24px; border-radius:12px; max-width:1000px; width:95%; text-align:left; }
-.modal-img { max-width:90%; max-height:80%; border-radius:12px; }
-.modal-controls { margin-top: 20px; }
-.modal-controls button { padding: 12px 20px; margin: 0 10px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; background-color: var(--cor-primaria); color: #fff; transition: background-color 0.3s; }
-.modal-controls button:hover { background-color: var(--cor-secundaria); }
-/* atividades */
-.atividade { background: #fff; padding: 25px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); min-width: 250px; max-width: 280px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s, opacity 0.4s; cursor: pointer; opacity: 0; animation: slideUp 0.5s forwards; text-align: center; }
-.atividade h3 { color: var(--cor-secundaria); margin-bottom: 12px; }
-@keyframes fadeIn { to { opacity:1; } }
-@keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
-/* formulário */
-.form-db { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 15px; width: 100%; max-width: 1100px; margin-top: 20px; }
-.form-db input,.form-db select,.form-db textarea { padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; font-size: 16px; box-sizing: border-box; }
-.form-db textarea { grid-column: 1 / -1; resize: none; height: 90px; }
-/* tabela + paginação */
-.table-wrap { width:100%; overflow-x:auto; margin-top: 30px; }
-.table-db { width:100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
-.table-db th, .table-db td { padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.08); text-align: left; font-size: 15px; }
-.table-db th { background: var(--cor-primaria); color: #fff; }
-.table-db tr:hover td { background: rgba(0,0,0,0.05); }
-.table-actions button { margin-right:8px; }
-.pagination { margin-top: 15px; display: flex; justify-content: center; gap: 15px; align-items:center; }
-.pagination button { background: var(--cor-primaria); color: #fff; border: none; border-radius: 6px; padding: 8px 14px; cursor: pointer; transition: background 0.3s; }
-.pagination button:disabled { opacity: .5; cursor: default; }
-.pagination button:hover:not(:disabled) { background: var(--cor-secundaria); }
-/* footer */
-footer { text-align: center; padding: 150px 20px; color: #333; border-top: 3px solid var(--cor-secundaria); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-footer h2 { color: var(--cor-secundaria); font-size: 42px; margin-bottom: 25px; }
-footer p { margin: 12px 0; font-size: 22px; }
-footer .social a { color: #E4405F; font-size: 60px; margin: 0 15px; transition: transform 0.3s ease, opacity 0.3s ease; }
-footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
-.badge { margin-top:10px; font-size:14px; color:#555; }
-
-/* links de contato (NOVO) */
-.contact-link { color: inherit; text-decoration: none; }
-.contact-link:hover { text-decoration: underline; }
-</style>
+<link rel="stylesheet" href="style.css"> <!-- seu CSS original -->
 </head>
 <body>
-<nav>
+
+<!-- MENU FIXO COM FUNDO BRANCO -->
+<nav style="
+  position:fixed; top:0; left:0; right:0; height:56px;
+  background:#fff; z-index:1000;
+  display:flex; align-items:center; justify-content:center; gap:25px;
+  white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  padding:12px 20px; box-shadow:0 2px 6px rgba(0,0,0,0.1);
+">
   <a href="#quem-somos">Quem Somos</a>
   <a href="#atividades">Atividades</a>
   <a href="#banco-dados">Cadastro</a>
   <a href="#contato">Contato</a>
 </nav>
+<!-- espaçador para o topo fixo -->
+<div style="height:56px;"></div>
 
 <div id="app">
+
   <header>
     <img alt="Logo ABUV" class="logo" src="logo.png"/>
   </header>
 
-  <!-- QUEM SOMOS -->
   <section id="quem-somos">
     <h2>Quem Somos</h2>
     <p v-for="p in textoQuemSomos">{{ p }}</p>
@@ -109,7 +40,6 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
     </div>
   </section>
 
-  <!-- ATIVIDADES -->
   <section id="atividades">
     <h2>Atividades</h2>
     <div class="atividades-carousel" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
@@ -123,12 +53,10 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
     </div>
   </section>
 
-  <!-- BANCO DE DADOS -->
   <section id="banco-dados">
     <h2>Cadastro</h2>
     <div class="badge">🔗 Status da API: <strong>{{ apiStatus }}</strong></div>
 
-    <!-- FORMULÁRIO -->
     <form @submit.prevent="insertRegistro" class="form-db">
       <input v-model="novo.nomeResponsavel" placeholder="Nome do responsável" required>
       <input v-model="novo.email" type="email" placeholder="E-mail" required>
@@ -152,13 +80,11 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
       <button type="button" class="botao-formulario" style="background:#dc3545;" @click="resetBanco" :disabled="loading">DELETE ALL</button>
     </form>
 
-    <!-- BUSCA + CONTADOR -->
     <div style="margin-top:20px; width:100%; max-width:900px;">
       <input v-model="filtro" placeholder="Buscar por nome do aluno ou do responsável..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;">
       <p style="margin:10px 0 0 0;"><strong>{{ registrosFiltrados.length }} registros encontrados</strong></p>
     </div>
 
-    <!-- TABELA -->
     <div class="table-wrap">
       <table class="table-db">
         <thead>
@@ -196,7 +122,6 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
       </table>
     </div>
 
-    <!-- PAGINAÇÃO -->
     <div class="pagination" v-if="totalPages > 1">
       <button @click="prevPage" :disabled="page===1 || loading">⟨ Anterior</button>
       <span>Página {{ page }} / {{ totalPages }}</span>
@@ -204,7 +129,6 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
     </div>
   </section>
 
-  <!-- CONTATO -->
   <footer id="contato">
     <h2>Contato</h2>
     <p>
@@ -225,73 +149,18 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
     </div>
   </footer>
 
-  <!-- MODAIS -->
-  <div v-if="modalOpen" class="modal" @click="modalOpen=false">
-    <img :src="modalImage" class="modal-img" @click.stop/>
-    <div class="modal-controls" @click.stop>
-      <button @click.stop="prevImage">⟨ Anterior</button>
-      <button @click.stop="nextImage">Próximo ⟩</button>
-      <button @click="modalOpen=false">Fechar ✕</button>
-    </div>
-  </div>
-
-  <div v-if="detalhes" class="modal" @click="detalhes=null">
-    <div class="modal-card" @click.stop>
-      <h3 style="margin-top:0; color:var(--cor-secundaria);">Detalhes do Cadastro #{{ detalhes.id }}</h3>
-      <p><b>Responsável:</b> {{ detalhes.nomeResponsavel }}</p>
-      <p><b>E-mail:</b> {{ detalhes.email }}</p>
-      <p><b>Celular:</b> {{ detalhes.celular }}</p>
-      <p><b>Endereço:</b> {{ detalhes.logradouro }}, nº {{ detalhes.numero }} - {{ detalhes.bairro }} ({{ detalhes.cidade }})</p>
-      <p v-if="detalhes.complemento"><b>Complemento:</b> {{ detalhes.complemento }}</p>
-      <p><b>Aluno:</b> {{ detalhes.nomeAluno }} - {{ detalhes.idade }} anos</p>
-      <p><b>Modalidade:</b> {{ detalhes.modalidade }}</p>
-      <p><b>Observações:</b> {{ detalhes.observacoes || '—' }}</p>
-      <div style="text-align:right; margin-top:10px;">
-        <button class="botao-formulario" @click="detalhes=null">Fechar</button>
-      </div>
-    </div>
-  </div>
-
-  <div v-if="editModal" class="modal" @click="closeEdit">
-    <div class="modal-card" @click.stop>
-      <h3 style="margin-top:0; color:var(--cor-secundaria);">Editar cadastro #{{ editBuffer.id }}</h3>
-      <div class="form-db">
-        <input v-model="editBuffer.nomeResponsavel" placeholder="Nome do responsável" required>
-        <input v-model="editBuffer.email" type="email" placeholder="E-mail" required>
-        <input v-model="editBuffer.celular" placeholder="Celular" required>
-        <input v-model="editBuffer.logradouro" placeholder="Logradouro" required>
-        <input v-model="editBuffer.numero" placeholder="Número" required>
-        <input v-model="editBuffer.bairro" placeholder="Bairro" required>
-        <input v-model="editBuffer.complemento" placeholder="Complemento">
-        <input v-model="editBuffer.cidade" placeholder="Cidade" required>
-        <input v-model="editBuffer.nomeAluno" placeholder="Nome do aluno" required>
-        <input v-model.number="editBuffer.idade" type="number" min="1" placeholder="Idade" required>
-        <select v-model="editBuffer.modalidade" required>
-          <option>Jiu Jitsu</option>
-          <option>Muay Thai</option>
-          <option>Krav Magá</option>
-          <option>Ginástica</option>
-        </select>
-        <textarea v-model="editBuffer.observacoes" placeholder="Observações"></textarea>
-      </div>
-      <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:16px;">
-        <button class="botao-formulario" style="background:#28a745;" @click="saveEdit">💾 Salvar</button>
-        <button class="botao-formulario" style="background:#6c757d;" @click="closeEdit">Cancelar</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <script>
-const API = 'https://script.google.com/macros/s/AKfycbyQMKKSEzg1DmceApbitOu3CkDIOBwUfwE42lMDEmHUD3myu-xfi6nIu_MR2cUjN8sQWQ/exec'; // <- sua URL mantém igual
+const API = 'https://script.google.com/macros/s/AKfycbyQMKKSEzg1DmceApbitOu3CkDIOBwUfwE42lMDEmHUD3myu-xfi6nIu_MR2cUjN8sQWQ/exec';
 
 new Vue({
   el: '#app',
   data: {
     textoQuemSomos: [
-      'A ABUV (Associação de bairro unidos venceremos) é uma organização comunitária na cidade de Tupã comprometida em melhorar a qualidade de vida e promover o bem-estar dos moradores de diversos bairros. Através de um trabalho conjunto e engajado, a direção da associação se dedica a coordenar e implementar uma variedade de atividades em beneficio da comunidade.',
-      'A associação atua como uma ponte entre os moradores e as autoridades locais, buscando soluções para os problemas enfrentados pelos bairros, bem como identificando oportunidades de desenvolvimento. Através de um diálogo aberto e constante, a direção da associação representa os interesses dos moradores, levando suas demandas às instâncias apropriadas e trabalhando em parceria com as autoridades para alcançar resultados positivos.',
-      'As atividades promovidas pela associação são diversas e abrangem áreas como educação, cultura, esportes, meio ambiente e assistência social. Através de projetos e iniciativas, a direção da associação busca criar oportunidades de aprendizado, fortalecer os laços comunitários, preservar o patrimônio cultural, fomentar a prática esportiva e proporcionar suporte às familias em situação de vulnerabilidade.'
+      'A ABUV (Associação de bairro unidos venceremos) é uma organização comunitária na cidade de Tupã comprometida em melhorar a qualidade de vida e promover o bem-estar dos moradores de diversos bairros.',
+      'A associação atua como uma ponte entre os moradores e as autoridades locais, buscando soluções para os problemas enfrentados pelos bairros.',
+      'As atividades promovidas abrangem educação, cultura, esportes, meio ambiente e assistência social.'
     ],
     atividades: {
       'Ginástica': 'Atividade física que melhora saúde, flexibilidade e disposição.',
@@ -301,8 +170,6 @@ new Vue({
     },
     imagens: ['1.jfif','2.jfif','3.jfif','4.jfif','5.jfif','6.jfif'],
     active: null,
-
-    // Banco vindo da API
     banco: [],
     novo: {
       nomeResponsavel:'', email:'', celular:'',
@@ -314,8 +181,6 @@ new Vue({
     perPage: 10,
     loading: false,
     apiStatus: 'desconectado',
-
-    // modais
     modalOpen: false,
     modalIndex: 0,
     modalImage: '',
@@ -340,62 +205,40 @@ new Vue({
   },
   watch: { filtro() { this.page = 1; } },
   methods: {
-    // -------- API helpers --------
     async apiGetList() {
       const url = API + '?action=list';
       const r = await fetch(url, { method: 'GET' });
       if (!r.ok) throw new Error('Falha ao listar');
       const data = await r.json();
-      // GET retorna diretamente os dados (sem wrapper {ok:true})
       this.banco = Array.isArray(data) ? data : (data.data || []);
     },
     async apiPost(action, payload) {
       const r = await fetch(API + '?action=' + action, {
         method: 'POST',
-        body: JSON.stringify(payload || {}) // requisição simples (sem preflight)
+        body: JSON.stringify(payload || {})
       });
       const json = await r.json();
       if (!r.ok || json.ok === false) throw new Error(json.error || 'Erro');
       return json.data;
     },
-    setStatus(ok) { this.apiStatus = ok ? 'conectado' : 'desconectado'; },
-
-    // -------- UI helpers --------
-    openModal(i) { this.modalIndex = i; this.modalImage = this.imagens[i]; this.modalOpen = true; }
-    ,
-    prevImage() { this.modalIndex = (this.modalIndex - 1 + this.imagens.length) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
-    nextImage() { this.modalIndex = (this.modalIndex + 1) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
-    toggle(nome) { this.active = this.active===nome?null:nome; },
-
-    // -------- CRUD --------
     async load() {
       this.loading = true;
       try {
         await this.apiGetList();
-        this.setStatus(true);
+        this.apiStatus = 'conectado';
       } catch (e) {
-        console.error(e);
-        this.setStatus(false);
-        alert('Não consegui conectar à API. Verifique a URL no topo do script.');
-      } finally {
-        this.loading = false;
-      }
+        this.apiStatus = 'desconectado';
+        alert('Não consegui conectar à API.');
+      } finally { this.loading = false; }
     },
     async insertRegistro() {
       this.loading = true;
       try {
         const created = await this.apiPost('insert', this.novo);
         this.banco.push(created);
-        // limpa form
         this.novo = { nomeResponsavel:'', email:'', celular:'', logradouro:'', numero:'', bairro:'', complemento:'', cidade:'', nomeAluno:'', idade:'', modalidade:'', observacoes:'' };
-        // rolar até a tabela
-        this.$nextTick(() => document.querySelector('#banco-dados .table-wrap')?.scrollIntoView({behavior:'smooth'}));
-        this.page = this.totalPages;
-      } catch (e) {
-        alert('Erro ao inserir: ' + e.message);
-      } finally {
-        this.loading = false;
-      }
+      } catch (e) { alert('Erro ao inserir: ' + e.message); }
+      finally { this.loading = false; }
     },
     viewDetalhes(r) { this.detalhes = r; },
     openEdit(r) { this.editBuffer = JSON.parse(JSON.stringify(r)); this.editModal = true; },
@@ -407,24 +250,17 @@ new Vue({
         const idx = this.banco.findIndex(x => Number(x.id) === Number(upd.id));
         if (idx !== -1) this.$set(this.banco, idx, upd);
         this.closeEdit();
-      } catch (e) {
-        alert('Erro ao salvar: ' + e.message);
-      } finally {
-        this.loading = false;
-      }
+      } catch (e) { alert('Erro ao salvar: ' + e.message); }
+      finally { this.loading = false; }
     },
-    async deleteRegistro(registro) {
+    async deleteRegistro(r) {
       if (!confirm('Deseja realmente excluir este registro?')) return;
       this.loading = true;
       try {
-        await this.apiPost('delete', { id: registro.id });
-        this.banco = this.banco.filter(r => Number(r.id) !== Number(registro.id));
-        if (this.page > this.totalPages) this.page = this.totalPages;
-      } catch (e) {
-        alert('Erro ao excluir: ' + e.message);
-      } finally {
-        this.loading = false;
-      }
+        await this.apiPost('delete', { id: r.id });
+        this.banco = this.banco.filter(x => Number(x.id) !== Number(r.id));
+      } catch (e) { alert('Erro ao excluir: ' + e.message); }
+      finally { this.loading = false; }
     },
     async resetBanco() {
       if (!confirm('Deseja realmente apagar todos os registros?')) return;
@@ -432,17 +268,15 @@ new Vue({
       try {
         await this.apiPost('delete_all', {});
         this.banco = [];
-        this.page = 1;
-      } catch (e) {
-        alert('Erro ao apagar tudo: ' + e.message);
-      } finally {
-        this.loading = false;
-      }
+      } catch (e) { alert('Erro ao apagar: ' + e.message); }
+      finally { this.loading = false; }
     },
-
-    // paginação
     prevPage() { if (this.page > 1) this.page--; },
-    nextPage() { if (this.page < this.totalPages) this.page++; }
+    nextPage() { if (this.page < this.totalPages) this.page++; },
+    openModal(i) { this.modalIndex = i; this.modalImage = this.imagens[i]; this.modalOpen = true; },
+    prevImage() { this.modalIndex = (this.modalIndex - 1 + this.imagens.length) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
+    nextImage() { this.modalIndex = (this.modalIndex + 1) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
+    toggle(nome) { this.active = this.active===nome?null:nome; }
   },
   mounted() { this.load(); }
 });
