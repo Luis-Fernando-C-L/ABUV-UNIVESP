@@ -148,6 +148,121 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
   <!-- ATIVIDADES -->
   <section id="atividades">
     <h2>Atividades</h2>
+  <!-- ====== GRADE DE AULAS (ABUV) — BLOCO AUTÔNOMO ====== -->
+  <div id="grade-abuv" style="width:100%;max-width:1100px;margin:24px auto 0;overflow-x:auto;">
+    <style>
+      /* Estilo escopado só para #grade-abuv (não interfere no resto) */
+      #grade-abuv table{border-collapse:separate;border-spacing:0;width:100%;min-width:760px;background:#fff;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.08);overflow:hidden}
+      #grade-abuv th,#grade-abuv td{padding:12px;border-bottom:1px solid rgba(0,0,0,0.06);border-right:1px solid rgba(0,0,0,0.06);text-align:left;vertical-align:top}
+      #grade-abuv thead th{position:sticky;top:0;background:#f7f9fc;color:#1b2845;font-weight:700;z-index:1}
+      #grade-abuv th:first-child,#grade-abuv td:first-child{background:#fafafa;font-weight:600;width:120px}
+      #grade-abuv tr:last-child td,#grade-abuv tr:last-child th{border-bottom:0}
+      #grade-abuv td:last-child,#grade-abuv th:last-child{border-right:0}
+      #grade-abuv .slot{display:inline-block;padding:8px 10px;border-radius:10px;font-weight:600;line-height:1.1;margin:4px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);user-select:none}
+      #grade-abuv .slot small{display:block;font-weight:500;opacity:.9;margin-top:4px}
+      /* Cores */
+      #grade-abuv .jj{background:#e8f1ff;border:1px solid #b7d2ff}  /* Jiu Jitsu */
+      #grade-abuv .mt{background:#ffeede;border:1px solid #ffd0a8}  /* Muay Thai */
+      #grade-abuv .km{background:#eaf7e7;border:1px solid #cdecc6}  /* Krav Magá */
+      #grade-abuv .gin{background:#fff0f6;border:1px solid #ffc1dc} /* Ginástica */
+      #grade-abuv .mob{background:#eef6ff;border:1px solid #c9e2ff}/* Mobilidade */
+      #grade-abuv .kids{background:#f4f4ff;border:1px solid #d8d8ff}/* Kids */
+      #grade-abuv .legenda{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px;font-size:14px}
+      #grade-abuv .legenda .item{display:flex;align-items:center;gap:8px}
+      #grade-abuv .legenda .cor{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,0.15)}
+      @media (max-width:480px){
+        #grade-abuv th:first-child,#grade-abuv td:first-child{width:88px}
+        #grade-abuv .slot{padding:6px 8px;font-size:14px}
+        #grade-abuv .slot small{font-size:12px}
+      }
+    </style>
+
+    <table aria-label="Grade de aulas semanal ABUV">
+      <thead>
+        <tr>
+          <th>Horário</th>
+          <th>Segunda</th>
+          <th>Terça</th>
+          <th>Quarta</th>
+          <th>Quinta</th>
+          <th>Sexta</th>
+          <th>Sábado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- MANHÃ -->
+        <tr>
+          <th>07:30 – 08:15</th>
+          <td><span class="slot mob">Mobilidade<small>Sala 1</small></span></td>
+          <td></td>
+          <td><span class="slot mob">Mobilidade<small>Sala 1</small></span></td>
+          <td></td>
+          <td><span class="slot mob">Mobilidade<small>Sala 1</small></span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>08:00 – 09:00</th>
+          <td></td>
+          <td><span class="slot gin">Ginástica<small>Quadra coberta</small></span></td>
+          <td></td>
+          <td><span class="slot gin">Ginástica<small>Quadra coberta</small></span></td>
+          <td></td>
+          <td><span class="slot gin">Ginástica<small>Quadra coberta</small></span></td>
+        </tr>
+
+        <!-- TARDE -->
+        <tr>
+          <th>17:00 – 18:00</th>
+          <td></td>
+          <td><span class="slot kids">Treino Kids<small>Sala 1</small></span></td>
+          <td></td>
+          <td><span class="slot kids">Treino Kids<small>Sala 1</small></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <!-- NOITE -->
+        <tr>
+          <th>18:30 – 20:00</th>
+          <td></td>
+          <td><span class="slot mt">Muay Thai<small>Sala 2</small></span></td>
+          <td></td>
+          <td><span class="slot mt">Muay Thai<small>Sala 2</small></span></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>19:00 – 20:30</th>
+          <td><span class="slot jj">Jiu Jitsu<small>Sala 1</small></span></td>
+          <td></td>
+          <td><span class="slot jj">Jiu Jitsu<small>Sala 1</small></span></td>
+          <td></td>
+          <td><span class="slot jj">Jiu Jitsu<small>Sala 1</small></span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>20:30 – 22:00</th>
+          <td><span class="slot km">Krav Magá<small>Sala 2</small></span></td>
+          <td></td>
+          <td><span class="slot km">Krav Magá<small>Sala 2</small></span></td>
+          <td></td>
+          <td><span class="slot km">Krav Magá<small>Sala 2</small></span></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Legenda -->
+    <div class="legenda" aria-label="Legenda de cores">
+      <div class="item"><span class="cor" style="background:#e8f1ff;"></span> Jiu Jitsu</div>
+      <div class="item"><span class="cor" style="background:#ffeede;"></span> Muay Thai</div>
+      <div class="item"><span class="cor" style="background:#eaf7e7;"></span> Krav Magá</div>
+      <div class="item"><span class="cor" style="background:#fff0f6;"></span> Ginástica</div>
+      <div class="item"><span class="cor" style="background:#eef6ff;"></span> Mobilidade</div>
+      <div class="item"><span class="cor" style="background:#f4f4ff;"></span> Kids</div>
+    </div>
+  </div>
+  <!-- ====== FIM DO BLOCO ====== -->  
     <div class="atividades-carousel" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
       <div class="atividade" v-for="(desc, nome) in atividades" :key="nome" @click="toggle(nome)">
         <h3>{{ nome }}</h3>
