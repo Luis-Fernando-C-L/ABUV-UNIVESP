@@ -9,10 +9,33 @@
 <style>
 :root { --cor-primaria: #1b2845; --cor-secundaria: #00b351; }
 body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; scroll-behavior: smooth; color: #333; background:#fff; }
-/* topo */
-nav { position: fixed; top: 0; right: 0; background: transparent; padding: 15px 25px; z-index: 1000; }
-nav a { margin-left: 25px; text-decoration: none; color: #333; font-weight: bold; font-size: 18px; transition: color 0.3s, transform 0.3s; }
+/* topo (AJUSTADO) */
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: transparent;
+  padding: 15px 25px;
+  z-index: 1000;
+  display: flex;               /* manter menu em linha */
+  gap: 25px;                   /* espaçamento entre links */
+  white-space: nowrap;         /* impede quebra de linha */
+  overflow-x: auto;            /* rolagem horizontal se apertar */
+  -webkit-overflow-scrolling: touch;
+}
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s, transform 0.3s;
+}
 nav a:hover { color: var(--cor-secundaria); transform: scale(1.05); }
+@media (max-width: 480px) {
+  nav { padding: 10px 14px; gap: 16px; }
+  nav a { font-size: 16px; }
+}
+
 header { height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #fff; }
 header img.logo { width: 320px; max-width: 80%; }
 /* seções */
@@ -62,6 +85,10 @@ footer p { margin: 12px 0; font-size: 22px; }
 footer .social a { color: #E4405F; font-size: 60px; margin: 0 15px; transition: transform 0.3s ease, opacity 0.3s ease; }
 footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
 .badge { margin-top:10px; font-size:14px; color:#555; }
+
+/* links de contato (NOVO) */
+.contact-link { color: inherit; text-decoration: none; }
+.contact-link:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -184,8 +211,16 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
   <!-- CONTATO -->
   <footer id="contato">
     <h2>Contato</h2>
-    <p>📞 +55 (14) 99671-1920</p>
-    <p>📧 abuvtupa@email.com</p>
+    <p>
+      <a href="tel:+5514996711920" class="contact-link" title="Ligar">
+        <i class="fas fa-phone"></i> +55 (14) 99671-1920
+      </a>
+    </p>
+    <p>
+      <a href="mailto:abuvtupa@email.com" class="contact-link" title="Enviar e-mail">
+        <i class="fas fa-envelope"></i> abuvtupa@email.com
+      </a>
+    </p>
     <p>📍 Rua Pioneiro Gallo Soares, nº 140 – Bairro José Feliciano – Tupã/SP</p>
     <div class="social">
       <a href="https://www.instagram.com/abuvtupa/" target="_blank" title="Instagram da ABUV">
@@ -252,7 +287,7 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
 </div>
 
 <script>
-const API = 'https://script.google.com/macros/s/AKfycbyQMKKSEzg1DmceApbitOu3CkDIOBwUfwE42lMDEmHUD3myu-xfi6nIu_MR2cUjN8sQWQ/exec'; // <- troque por sua URL
+const API = 'https://script.google.com/macros/s/AKfycbyQMKKSEzg1DmceApbitOu3CkDIOBwUfwE42lMDEmHUD3myu-xfi6nIu_MR2cUjN8sQWQ/exec'; // <- sua URL mantém igual
 
 new Vue({
   el: '#app',
@@ -321,7 +356,7 @@ new Vue({
     async apiPost(action, payload) {
       const r = await fetch(API + '?action=' + action, {
         method: 'POST',
-        body: JSON.stringify(payload || {}) // Content-Type vira text/plain (requisição simples)
+        body: JSON.stringify(payload || {}) // requisição simples (sem preflight)
       });
       const json = await r.json();
       if (!r.ok || json.ok === false) throw new Error(json.error || 'Erro');
@@ -330,7 +365,8 @@ new Vue({
     setStatus(ok) { this.apiStatus = ok ? 'conectado' : 'desconectado'; },
 
     // -------- UI helpers --------
-    openModal(i) { this.modalIndex = i; this.modalImage = this.imagens[i]; this.modalOpen = true; },
+    openModal(i) { this.modalIndex = i; this.modalImage = this.imagens[i]; this.modalOpen = true; }
+    ,
     prevImage() { this.modalIndex = (this.modalIndex - 1 + this.imagens.length) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
     nextImage() { this.modalIndex = (this.modalIndex + 1) % this.imagens.length; this.modalImage = this.imagens[this.modalIndex]; },
     toggle(nome) { this.active = this.active===nome?null:nome; },
