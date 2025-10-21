@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ABUV - Associação de Bairros Unidos Venceremos</title>
+<title>ABUV - Asssociação de Bairros Unidos Venceremos</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <style>
@@ -14,21 +14,25 @@ nav {
   position: fixed;
   top: 0;
   right: 0;
-  left: 0;
-  height: 56px;               /* altura fixa do topo */
-  background: #fff !important; /* força fundo branco */
-  padding: 12px 20px;         /* ajustado p/ caber nos 56px */
+  background: transparent;
+  padding: 15px 25px;
   z-index: 1000;
-  display: flex;
-  align-items: center;        /* centraliza verticalmente os links */
-  gap: 25px;
-  white-space: nowrap;
-  overflow-x: auto;
+  display: flex;               /* manter menu em linha */
+  gap: 25px;                   /* espaçamento entre links */
+  white-space: nowrap;         /* impede quebra de linha */
+  overflow-x: auto;            /* rolagem horizontal se apertar */
   -webkit-overflow-scrolling: touch;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s, transform 0.3s;
+}
+nav a:hover { color: var(--cor-secundaria); transform: scale(1.05); }
 @media (max-width: 480px) {
-  nav { padding: 8px 12px; gap: 16px; height: 48px; }
+  nav { padding: 10px 14px; gap: 16px; }
   nav a { font-size: 16px; }
 }
 
