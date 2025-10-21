@@ -27,11 +27,28 @@ nav {
   align-items: center;         /* centraliza verticalmente */
 }
 
+nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0; /* ocupa toda a largura, sem alterar posição */
+  background: transparent; /* mantém transparente */
+  padding: 15px 25px;
+  z-index: 1000;
+  display: flex;               /* manter menu em linha */
+  gap: 22px;                   /* leve ajuste só pra dar folga */
+  white-space: nowrap;         /* impede quebra de linha */
+  overflow-x: auto;            /* rolagem horizontal se apertar */
+  -webkit-overflow-scrolling: touch;
+  align-items: center;         /* mantém alinhado na mesma linha */
+  justify-content: flex-start; /* ABUV visível à esquerda */
+}
+
 nav a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
-  font-size: 15px; /* ↓ menor que antes pra caber tudo */
+  font-size: 17px; /* levemente menor que 18px, suficiente pra caber tudo */
   transition: color 0.3s, transform 0.3s;
 }
 
@@ -43,10 +60,10 @@ nav a:hover {
 @media (max-width: 480px) {
   nav {
     padding: 10px 14px;
-    gap: 12px;
+    gap: 14px;
   }
   nav a {
-    font-size: 13px; /* ↓ ajustado pro mobile */
+    font-size: 15px; /* reduz só no mobile */
   }
 }
 
