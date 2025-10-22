@@ -414,7 +414,7 @@ new Vue({
     },
     filtro: '',
     page: 1,
-    perPage: 10,
+    perPage: 5,
     loading: false,
     apiStatus: 'desconectado',
 
@@ -528,7 +528,16 @@ new Vue({
       }
     },
     async deleteRegistro(registro) {
+      // pedir senha antes de confirmar
+      const senha = prompt('Informe a senha para excluir o registro:');
+      if (senha === null) return; // cancelado
+      if (senha !== '1234') {
+        alert('Senha incorreta.');
+        return;
+      }
+
       if (!confirm('Deseja realmente excluir este registro?')) return;
+
       this.loading = true;
       try {
         await this.apiPost('delete', { id: registro.id });
@@ -541,7 +550,15 @@ new Vue({
       }
     },
     async resetBanco() {
+      const senha = prompt('Informe a senha para APAGAR TODOS os registros:');
+      if (senha === null) return; // cancelado
+      if (senha !== '1234') {
+        alert('Senha incorreta.');
+        return;
+      }
+
       if (!confirm('Deseja realmente apagar todos os registros?')) return;
+
       this.loading = true;
       try {
         await this.apiPost('delete_all', {});
@@ -553,7 +570,6 @@ new Vue({
         this.loading = false;
       }
     },
-
     // paginação
     prevPage() { if (this.page > 1) this.page--; },
     nextPage() { if (this.page < this.totalPages) this.page++; }
