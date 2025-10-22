@@ -330,7 +330,7 @@ footer .social a:hover { transform: scale(1.2); opacity: 0.8; }
 
   <div v-if="editModal" class="modal" @click="closeEdit">
     <div class="modal-card" @click.stop>
-      <h3 style="margin-top:0; color:var(--cor-secundaria);">Editar cadastro #{{ editBuffer.id }}</h3>
+      <h3 style="margin-top:0; color:var(--cor-secundaria);">Editar cadastro</h3>
       <div class="form-db">
         <input v-model="editBuffer.nomeResponsavel" placeholder="Nome do responsável" required>
         <input v-model="editBuffer.email" type="email" placeholder="E-mail" required>
